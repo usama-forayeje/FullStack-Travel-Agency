@@ -41,6 +41,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+import { registerLicense } from "@syncfusion/ej2-base";
+
+registerLicense(
+  import.meta.env.VITE_SYNC_FUSION_KEY
+)
+
 export default function App() {
   return <Outlet />;
 }
