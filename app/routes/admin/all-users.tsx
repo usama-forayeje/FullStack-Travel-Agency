@@ -1,9 +1,12 @@
-import React from 'react'
+import { Header } from "~/components";
 
 function AllUsers() {
   return (
-    <div>AllUsers</div>
-  )
+    <main className="dashboard wrapper">
+      <Header title="All Users" description="Track user in real time." />
+      All User Page Contents
+    </main>
+  );
 }
 
-export default AllUsers
+export default AllUsers;
