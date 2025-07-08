@@ -1,13 +1,17 @@
 import { cn } from "lib/utils";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLoaderData, useNavigate } from "react-router";
+import { logoutUser } from "~/appwrite/auth";
 import { sidebarItems } from "~/constants";
 
 function NavItems({ handleClick }: { handleClick?: () => void }) {
-  const user = {
-    name: "Usama Forayaje",
-    email: "usama@usama.com",
-    imageUrl: "https://placehold.co/150",
+  const user = useLoaderData();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logoutUser();
+    navigate("/sign-in");
   };
+
   return (
     <section className="nav-items">
       <Link to={"/"} className="link-logo">
@@ -43,18 +47,14 @@ function NavItems({ handleClick }: { handleClick?: () => void }) {
           <img
             src={user?.imageUrl || "/assets/images/david.webp"}
             alt={user?.name || "Usama"}
+            referrerPolicy="no-referrer"
           />
           <article>
             <h2>{user?.name || "Usama"}</h2>
             <p>{user?.email || "usama@usama.com"}</p>
           </article>
 
-          <button
-            onClick={() => {
-              console.log("logout");
-            }}
-            className="cursor-pointer"
-          >
+          <button onClick={handleLogout} className="cursor-pointer">
             <img
               src="/assets/icons/logout.svg"
               alt="logout"

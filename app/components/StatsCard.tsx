@@ -1,11 +1,18 @@
 import { calculateTrendPercentage, cn } from "lib/utils";
 
+interface StatsCardProps {
+  headerTitle: string;
+  total: number;
+  lastMonthCount: number;
+  currentMonthCount: number;
+}
+
 function StatsCard({
   headerTitle,
   total,
   lastMonthCount,
   currentMonthCount,
-}: StatsCard) {
+}: StatsCardProps) {
   const { trend, percentage } = calculateTrendPercentage(
     currentMonthCount,
     lastMonthCount
@@ -14,12 +21,16 @@ function StatsCard({
   const isDecrement = trend === "decrement";
 
   return (
-    <article className="stats-card">
-      <h3 className="text-base font-medium">{headerTitle}</h3>
-      <div className="content">
-        <div className="flex flex-col gap-4">
-          <h2 className="text-4xl font-semibold">{total}</h2>
-          <div className="flex items-center gap-2">
+    <article className="bg-white rounded-xl shadow-lg p-6 flex flex-col justify-between h-full transition-all duration-300 hover:shadow-xl hover:scale-[1.01] transform">
+      <h3 className="text-base font-semibold text-gray-700 mb-4">
+        {headerTitle}
+      </h3>
+      <div className="flex justify-between items-end gap-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-4xl font-extrabold text-gray-900 leading-none">
+            {total.toLocaleString()}
+          </h2>
+          <div className="flex items-center gap-2 mt-2">
             <figure className="flex items-center gap-1">
               <img
                 src={`/assets/icons/${
@@ -30,8 +41,8 @@ function StatsCard({
               />
               <figcaption
                 className={cn(
-                  "text-sm font-medium",
-                  isDecrement ? "text-red-500" : "text-green-500"
+                  "text-base font-semibold",
+                  isDecrement ? "text-red-600" : "text-green-600"
                 )}
               >
                 {typeof percentage === "number"
@@ -39,11 +50,12 @@ function StatsCard({
                   : "N/A"}
               </figcaption>
             </figure>
-            <p className="text-sm font-medium text-gray-100 truncate">
+            <p className="text-sm font-medium text-gray-500 truncate">
               vs last month
             </p>
           </div>
         </div>
+
         <img
           src={`/assets/icons/${
             isDecrement ? "decrement.svg" : "increment.svg"
@@ -51,7 +63,7 @@ function StatsCard({
           alt={
             isDecrement ? "overall decrement icon" : "overall increment icon"
           }
-          className="xl:w-32 w-full h-full md:h-32 xl:h-full"
+          className="w-24 h-24 object-contain md:w-28 md:h-28 lg:w-32 lg:h-32 flex-shrink-0"
         />
       </div>
     </article>
