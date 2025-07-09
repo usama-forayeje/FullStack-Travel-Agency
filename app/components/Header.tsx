@@ -1,12 +1,15 @@
 import { cn } from "lib/utils";
-import { useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
+import { Button } from "./ui/button";
 
 type Props = {
   title: string;
   description: string;
+  ctaText?: string;
+  ctaUrl?: string;
 };
 
-function Header({ title, description }: Props) {
+function Header({ title, description, ctaText, ctaUrl }: Props) {
   const location = useLocation();
   return (
     <header className="header wrapper">
@@ -27,11 +30,16 @@ function Header({ title, description }: Props) {
             location.pathname === "/"
               ? "text-base md:text-lg "
               : "text-sm md:text-lg"
-          )} 
+          )}
         >
           {description}
         </p>
       </article>
+      {ctaText && ctaUrl && (
+        <Link to={ctaUrl}>
+          <Button className="cursor-pointer">{ctaText}</Button>
+        </Link>
+      )}
     </header>
   );
 }

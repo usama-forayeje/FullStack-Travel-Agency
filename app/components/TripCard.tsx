@@ -19,7 +19,7 @@ function TripCard({
           ? `/travel/${id}`
           : `/trips/${id}`
       }
-      className="block w-full max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:-translate-y-1 bg-white" // নেক্সট লেভেল স্টাইলিং
+      className="block w-full max-w-sm rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform  bg-white" // নেক্সট লেভেল স্টাইলিং
     >
       <div className="relative w-full h-48 overflow-hidden">
         <img
